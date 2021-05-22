@@ -1,0 +1,4 @@
+172.52.52.200   lco-ansible-master.example.com  lco-ansible-master
+172.22.22.100   kube-master.example.com         kube-master
+172.22.22.101   kube-worker1.example.com        kube-worker1
+172.22.22.102   kube-worker2.example.com        kube-worker2

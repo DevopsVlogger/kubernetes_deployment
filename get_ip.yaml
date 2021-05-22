@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: yes
+  tasks:
+    # Here we get the IP address of the remote target or host using the SSH Connection between the ansible master and the host.
+    - debug: var=hostvars[inventory_hostname]['ansible_env'].SSH_CONNECTION.split(' ')[2]
+
+    - debug: var=hostvars[inventory_hostname]['ansible_default_ipv4']['address']
+    - debug: var=hostvars[inventory_hostname]['ansible_default_ipv6']['address']
+
+    # Getting the IP address of enp0s3 interface
+    - debug: var=ansible_enp0s3.ipv4.address
+    # Getting the IP address of eth0 interface
+    - debug: var=ansible_eth1.ipv4.address
