@@ -96,7 +96,7 @@
       lineinfile:
         create: yes
         path: /etc/default/kubelet
-        line: KUBELET_EXTRA_ARGS=--node-ip={{ ip }}
+        line: KUBELET_EXTRA_ARGS=--node-ip={{ ansible_default_ipv4.address }}
 
     - name: Restart kubelet service
       service:
@@ -112,7 +112,7 @@
       with_items:
       - mkdir -p $HOME/.kube
       - cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-      - chown $(id -u):$(id -g) $HOME/.kube/config
+      - chown root:root $HOME/.kube/config
 
 #Setup the container networking provider and the network policy engine using the below code
     - name: Install calico pod network
