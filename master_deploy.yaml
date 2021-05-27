@@ -3,9 +3,9 @@
   become: true
   gather_facts: yes
   vars:
-    api_server_ip: 10.14.92.145
+    api_server_ip: 172.22.22.100
     pod_internal_nw: 192.168.0.0/16
-    master_node_name: felabs-ops-kmaster
+    master_node_name: kube-kmaster
   tasks: 
     - name: Allow Apt to be used over https by installing few packages
       apt:
