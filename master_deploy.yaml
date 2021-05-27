@@ -2,6 +2,10 @@
 - hosts: all
   become: true
   gather_facts: yes
+  vars:
+    api_server_ip: 10.14.92.145
+    pod_internal_nw: 192.168.0.0/16
+    master_node_name: felabs-ops-kmaster
   tasks: 
     - name: Allow Apt to be used over https by installing few packages
       apt:
@@ -105,7 +109,7 @@
         state: restarted
 
     - name: Initialize the Kubernetes cluster using kubeadm
-      command: kubeadm init --apiserver-advertise-address="172.22.22.100" --apiserver-cert-extra-sans="172.22.22.100"  --node-name kube-master --pod-network-cidr=192.168.0.0/16
+      command: kubeadm init --apiserver-advertise-address="{{ api_server_ip }}" --apiserver-cert-extra-sans="{{ api_server_ip }}"  --node-name "{{ master_node_name }}" --pod-network-cidr="{{ pod_internal_nw }}"
 
     - name: Setup kubeconfig
       command: "{{ item }}"
