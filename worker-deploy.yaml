@@ -40,11 +40,6 @@
       notify:
         - docker status
 
-    - name: Add vagrant user to docker group
-      user:
-        name: vagrant
-        group: docker
-
     - name: Remove swapfile from /etc/fstab
       mount:
         name: "{{ item }}"
@@ -84,7 +79,7 @@
       lineinfile:
         create: yes
         path: /etc/default/kubelet
-        line: KUBELET_EXTRA_ARGS=--node-ip={{ ansible_eth1.ipv4.address }}
+        line: KUBELET_EXTRA_ARGS=--node-ip={{ ansible_default_ipv4.address }}
 
     - name: Restart kubelet
       service:
